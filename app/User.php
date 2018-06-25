@@ -77,14 +77,14 @@ class User extends Authenticatable
 
     public function have($itemId)
     {
-        // 既に Have しているかの確認
+        // 既に have しているかの確認
         $exist = $this->is_having($itemId);
 
         if ($exist) {
-            // 既に Have していれば何もしない
+            // 既に have していれば何もしない
             return false;
         } else {
-            // 未 Have であれば Have する
+            // 未 have であれば have する
             $this->items()->attach($itemId, ['type' => 'have']);
             return true;
         }
@@ -92,14 +92,14 @@ class User extends Authenticatable
 
     public function dont_have($itemId)
     {
-        // 既に Have しているかの確認
+        // 既に have しているかの確認
         $exist = $this->is_having($itemId);
 
         if ($exist) {
-            // 既に Have していれば Have を外す
+            // 既に have していれば have を外す
             \DB::delete("DELETE FROM item_user WHERE user_id = ? AND item_id = ? AND type = 'have'", [\Auth::id(), $itemId]);
         } else {
-            // 未 Have であれば何もしない
+            // 未 have であれば何もしない
             return false;
         }
     }
@@ -114,4 +114,5 @@ class User extends Authenticatable
             return $item_code_exists;
         }
     }
+    
 }
